@@ -1,0 +1,734 @@
+\documentclass[12pt]{article} 
+%環境套件
+\usepackage{geometry} 
+\geometry{top=2cm, bottom=2cm, left=2.5cm, right=2.5cm} 
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{svg}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{xfrac}
+
+%數學套件
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{accents}
+\newcommand{\hvec}[1]{\accentset{\rightharpoonup}{#1}}
+%%方程式編號配置軟件
+\newcounter{savedequation}
+
+%中文軟件
+\usepackage{xeCJK}
+    \setCJKmainfont[AutoFakeBold=3]{AR PL UKai TW}
+    \XeTeXlinebreaklocale "zh"             
+    \XeTeXlinebreakskip = 0pt plus 1pt
+
+%其他文字軟件
+\usepackage[cal=dutchcal]{mathalfa}
+\usepackage[mathscr]{euscript}
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+\section{system}
+系統結構如下：
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{purely manetic field.png}
+    \label{fig:placeholder}
+\end{figure}
+\noindent
+得到磁矢勢
+\begin{equation}
+    \vec{B}(x)=\frac{B_0x}{L}\hat{k}\to\vec{A}=\frac{B_0x^2}{2L}\hat{j}
+\end{equation}
+\section{經典方法 A（The classical approach-A）}
+從牛頓力學的角度出法，我們可以結合勞倫茲力，得到：
+\begin{equation}
+    \vec{F}=\vec{F}_B\to m\vec{a}=-e\vec{v}\times\vec{B}
+\end{equation}
+帶入系統磁場函數，有：
+\begin{equation}
+    m\begin{pmatrix}\ddot{x}\\\ddot{y}\end{pmatrix}=-\frac{eB_0}{L}\begin{pmatrix}x\dot{y}\\-x\dot{x}\end{pmatrix}
+\end{equation}
+化簡為聯立，得：
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        &m^*\ddot{x}=-\frac{eB_0}{L}x\dot{y}\\
+        &m^*\ddot{y}=\frac{eB_0}{L}x\dot{x}
+    \end{aligned}
+    \right.
+\end{equation}
+注意到下式可改寫為
+\begin{equation}
+    \frac{d}{dt}\left(m\dot{y}-\frac{eB_0}{2L}x^2\right)=0
+\end{equation}
+發現$y$方向遵守共軛動量守恆，即：
+\begin{equation}
+    m\dot{y}-\frac{eB_0}{2L}x^2=const=p_y
+\end{equation}
+使得$y$方向速度可以完全寫成$x$的函數：
+\begin{equation}
+    \dot{y}=\alpha+\frac12\beta x^2
+\end{equation}
+其中\[\alpha=\frac{p_y}{m^*}\]可由初始條件決定\[\beta=\frac{eB_0}{m^*L}\]由系統結構決定
+化簡上式
+\begin{equation}
+    \ddot{x}=-\beta x\left(\alpha+\frac12\beta x^2\right)=-\alpha\beta x-\frac12\beta^2 x^3
+\end{equation}
+因此此系統的EOM為{\color{red}
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        &\ddot{x}+\alpha\beta x+\frac12\beta^2x^3=0 \\
+        &\dot{y}=\alpha+\frac12\beta x^2
+    \end{aligned}
+    \right.\label{9}
+\end{equation}
+}
+\section{經典方法 B（The classical approach-B）}
+從哈密頓力學的角度出發，我們由自由粒子最小耦合替換（Minimal Coupling Substitution）\[\vec{p}\to\vec{p}-q\vec{A}\] 其中$\vec{p}$為共軛動量，可以建構出哈密頓量：
+\begin{equation}
+    H_{free}=\frac{p^2}{2m}\to H_{sub}=\frac{(\vec{p}-q\vec{A})^2}{2m}
+\end{equation}
+帶入系統結構
+\begin{equation}
+    H=\frac{1}{2m^*}\left(\begin{pmatrix}p_x\\p_y\end{pmatrix}+\frac{eB_0}{2L}\begin{pmatrix}0\\x^2\end{pmatrix}\right)^2
+\end{equation}
+化簡
+\begin{equation}
+    H=\frac{p_x^2}{2m^*}+\frac{1}{2m^*}\left(p_y+\frac{eB_0}{2L}x^2\right)^2
+\end{equation}
+接著定義
+\begin{align*}
+    \alpha=\frac{p_y}{m^*} \qquad \beta=\frac{eB_0}{m^*L}
+\end{align*}
+可進一步化簡得到：
+\begin{equation}
+    H=H(p_x,p_y,x;t)=\frac{p_x^2}{2m^*}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2\label{13}
+\end{equation}
+\newpage
+\noindent
+有了哈密頓量，就可以帶正則方程，觀察函數型態，應可帶四條正則方程，分別為
+\begin{enumerate}
+    \item $x$方向第一正則方程
+\begin{equation*}
+    \dot{x}=\frac{\partial H}{\partial p_x}
+\end{equation*}
+帶入可得
+\begin{equation}
+    \dot{x}=\frac{p_x}{m^*}\to p_x=m^*\dot{x}\label{14}
+\end{equation}
+    \item $x$方向第二正則方程
+\begin{equation*}
+    \dot{p}_x=-\frac{\partial H}{\partial x}
+\end{equation*}
+帶入可得
+\begin{align}
+    \dot{p}_x
+    &=-\frac{\partial}{\partial (\alpha+\frac12\beta x^2)}\left(\frac{p_x^2}{2m^*}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2\right)\cdot\frac{\partial}{\partial x}\left(\alpha+\frac12\beta x^2\right) \nonumber \\
+    &=-m^*\beta x\left(\alpha+\frac12\beta x^2\right) \nonumber \\
+    &=-m^*\alpha\beta x-\frac12m^*\beta^2x^3
+\end{align}
+帶入式\eqref{14}，可發現正則動量在$x$方向上，完全等於機械動量$\pi$，因此
+\begin{align}
+    \dot{p}_x=\dot{\pi}_x=m^*\ddot{x}=-m^*\alpha\beta x-\frac12m^*\beta^2x^3
+\end{align}
+化簡得
+\begin{equation}
+    \ddot{x}=-\alpha\beta x-\frac12\beta^2x^3\label{17}
+\end{equation}
+    \item $y$方向第一正則方程
+\begin{equation*}
+    \dot{y}=\frac{\partial H}{\partial p_y}
+\end{equation*}
+帶入可得
+\begin{align}
+    \dot{y}&=\frac{\partial}{\partial (\alpha+\frac12\beta x^2)}\left(\frac{p_x^2}{2m^*}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2\right)\cdot\frac{\partial (\alpha+\frac12\beta x^2)}{\partial\alpha}\cdot\frac{\partial\alpha}{\partial p_y}\nonumber\\
+    &=m^*\left(\alpha+\frac12\beta x^2\right)\cdot\frac{1}{m^*}\nonumber\\
+    &=\alpha+\frac12\beta x^2\label{18}
+\end{align}
+    \item $y$方向第二正則方程
+\begin{equation*}
+    \dot{p}_y=-\frac{\partial H}{\partial y}
+\end{equation*}
+帶入可得
+\begin{equation}
+    \dot{p}_y=0
+\end{equation}
+表示$y$方向正則動量守恆：\[p_y=\text{const}\]
+\end{enumerate}
+\newpage
+\noindent
+結合式\eqref{17}與式\eqref{18}，可得系統的EOM為{\color{red}
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        &\ddot{x}+\alpha\beta x+\frac12\beta^2x^3=0 \\
+        &\dot{y}=\alpha+\frac12\beta x^2
+    \end{aligned}
+    \right.\label{20}
+\end{equation}
+}
+\section{\texorpdfstring{$\alpha$}{alpha}參數（The \texorpdfstring{$\alpha$}{alpha} parameter in classical approach）}
+設定電子的初始條件為：
+\begin{align}
+    &\hvec{r}(0)=x_0\hat{i}+y_0\hat{j} \nonumber\\
+    &\hvec{v}(0)=v_0\cos(\theta)\hat{i}+v_0\sin(\theta)\hat{j}
+\end{align}
+已知
+\begin{equation}
+    \alpha=\frac{p_y}{m^*}=\dot{y}-\frac{eB_0}{2m^*L}x^2=\dot{y}-\frac12\beta x^2
+\end{equation}
+動能（給定系統的能量）決定初速大小：
+\begin{equation}
+    E=\frac12m^*v_0^2\to v_0=\sqrt{\frac{2E}{m^*}}
+\end{equation}
+因此$y$方向初始速度
+\begin{equation}
+    \dot{y}(0)=\sqrt{\frac{2E}{m^*}}\sin(\theta)
+\end{equation}
+得到$\alpha$：
+\begin{equation}
+    \alpha=\sqrt{\frac{2E}{m^*}}\sin(\theta)-\frac12\beta x_0^2\label{25}
+\end{equation}
+\section{量子方法（The quantum approach）}
+當不考慮自旋（即自旋為0粒子），因為系統相同，可沿用經典方法B得到的哈密頓量：
+\begin{equation}
+    H=\frac{p_x^2}{2m^*}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2
+\end{equation}
+將物理量算符化（注意到$y$方向具有對稱性，行為為行波，故不需算符化，使得$p_y=m^*\alpha=\hbar k_y$），取實空間系統，有：
+\begin{equation}
+    p_x\to\hat{p}_x=-i\hbar\frac{d}{dx}\qquad x\to \hat{x}=x
+\end{equation}
+得到
+\begin{equation}
+    H=-\frac{\hbar^2}{2m^*}\frac{d^2}{dx^2}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2
+\end{equation}
+帶入TISE（Time-independent Schrödinger equation）下，有
+\begin{equation}
+    -\frac{\hbar^2}{2m^*}\frac{d^2\psi}{dx^2}+\frac{1}{2}m^*\left(\alpha+\frac12\beta x^2\right)^2\psi=E\psi\label{29}
+\end{equation}
+其中有初始態$\psi(0)$，而與經典的概念應相同，猜測$\alpha$應與初始態相關。
+\newline
+接著可利用埃倫費斯特定理（Ehrenfest theorem）得到運動方程式EOM：
+\begin{equation}
+    \frac{d\langle\hat{O}\rangle}{dt}=\frac{1}{i\hbar}\left\langle\left[\hat{O},H\right]\right\rangle+\left\langle\frac{\partial\hat{O}}{\partial t}\right\rangle
+\end{equation}
+當算符自身不顯含於時間，則可簡化為：
+\begin{equation}
+    \frac{d\langle\hat{O}\rangle}{dt}=\frac{1}{i\hbar}\left\langle\left[\hat{O},H\right]\right\rangle
+\end{equation}
+其中哈密頓量：
+\begin{equation}
+     H=H(p_x,p_y,x;t)=\frac{p_x^2}{2m^*}+V(x,\alpha)
+\end{equation}
+而有效位能：
+\begin{equation}
+    V(x,\alpha)=\frac{1}{2}m^*\alpha^2 + \frac{1}{2}m^*\alpha\beta x^2 + \frac{1}{8}m^*\beta^2 x^4
+\end{equation}
+觀察位能型態，應為束縛態，因此期望值為
+\begin{equation}
+    \left\langle\hat{O}\right\rangle=\left\langle\hat{O}\right\rangle_n=\left\langle\psi_n(t)\left|\hat{O}\right|\psi_n(t)\right\rangle
+\end{equation}
+帶入平面系統，可以列出4條EOM：
+\begin{enumerate}
+    \item $\hat{O}=x$
+\newline\noindent
+求對易子（Commutator term）
+\begin{equation*}
+    \left[x,\frac{p_x^2}{2m^*}+V(x,\alpha)\right]=\frac{1}{2m^*}\left[x,p_x^2\right]+\left[x,V(x,\alpha)\right]
+\end{equation*}
+第一項：
+\begin{equation*}
+    \left[x,p_x^2\right]= [x, p_x] p_x + p_x [x, p_x]
+\end{equation*}
+由\[[x,p_x]=i\hbar\]
+可得
+\begin{equation*}
+    \left[ x, p_x^2 \right] = (i\hbar) p_x + p_x (i\hbar) = 2i\hbar p_x
+\end{equation*}
+因此
+\begin{equation}
+    \frac{1}{2m^*}\left[ x, p_x^2 \right] = \frac{1}{2m^*} (2i\hbar p_x) = \frac{i\hbar}{m^*}p_x
+\end{equation}
+第二項：
+\begin{equation}
+    [x, V(x, \alpha)] = x V(x, \alpha) - V(x, \alpha) x = 0
+\end{equation}
+因此
+\begin{equation}
+    [x,H]=\frac{i\hbar}{m^*}p_x
+\end{equation}
+帶回 Ehrenfest thrm，得：
+\begin{align}
+    &\frac{d\langle\hat{x}\rangle}{dt}=\frac{1}{i\hbar}\cdot\frac{i\hbar}{m^*}\langle p_x\rangle=\frac{\langle p_x\rangle}{m^*}\nonumber \\
+    &\to \langle p_x\rangle=m^*\frac{d\langle x\rangle}{dt}
+\end{align}
+量子化：
+\begin{equation}
+    \langle p_x\rangle_n=m^*\frac{d\langle x\rangle_n}{dt}\label{39}
+\end{equation}
+洽對應式\eqref{14}
+    \item $\hat{O}=p_x$
+\newline\noindent
+求對易子
+\begin{equation*}
+    \left[p_x,\frac{p_x^2}{2m^*}+V(x,\alpha)\right]=\frac{1}{2m^*}\left[p_x,p_x^2\right]+\left[p_x,V(x,\alpha)\right]
+\end{equation*}
+第一項明顯為0
+\newline\noindent
+第二項：
+\begin{equation}
+    [p_x,V(x,\alpha)]\to[p_x,V(x,\alpha)]\phi
+\end{equation}
+展開化簡：
+\[\begin{aligned} [p_x, V(x,\alpha)] \phi &= p_x (V(x,\alpha) \phi) - V(x,\alpha) p_x\phi \\ &= -i\hbar \frac{\partial}{\partial x} \big( V(x,\alpha) \phi \big) - V(x,\alpha) \left( -i\hbar \frac{\partial\phi}{\partial x} \right) \\ &= -i\hbar \left( \frac{\partial V}{\partial x}\phi + V(x,\alpha)\frac{\partial\phi}{\partial x} \right) + i\hbar V(x,\alpha)\frac{\partial\phi}{\partial x} \\ &= -i\hbar \frac{\partial V}{\partial x} \phi \end{aligned}\]
+因此
+\begin{equation}
+    [p_x,V(x,\alpha)]=-i\hbar \frac{\partial V}{\partial x}
+\end{equation}
+把微分項算出：
+\[\frac{\partial V}{\partial x}=\frac{\partial}{\partial x}\left(\frac{1}{2}m^*\alpha^2 + \frac12m^*\alpha\beta x^2 + \frac18m^*\beta^2 x^4\right)=m^*\alpha\beta x+\frac12m^*\beta^2 x^3\]
+得到
+\begin{equation}
+    [p_x,V(x,\alpha)]=-i\hbar m^*\left(\alpha\beta x+\frac12\beta^2 x^3\right)
+\end{equation}
+因此
+\begin{equation}
+    [p_x,H]=-i\hbar m^*\left(\alpha\beta x+\frac12\beta^2 x^3\right)
+\end{equation}
+帶回 Ehrenfest thrm，得：
+\begin{align}
+    &\frac{d\langle\hat{p}_x\rangle}{dt}=\frac{1}{i\hbar}\cdot(-i\hbar m^*)\left\langle\alpha\beta x+\frac12\beta^2 x^3\right\rangle=-m^*\left\langle\alpha\beta x+\frac12\beta^2 x^3\right\rangle\nonumber \\
+    &\to\frac{d\langle\hat{p}_x\rangle}{dt}=-m^*\alpha\beta\langle x\rangle-\frac12m^*\beta^2\langle x^3\rangle
+\end{align}
+量子化：
+\begin{equation}
+    \frac{d\langle\hat{p}_x\rangle_n}{dt}=-m^*\alpha\beta\langle x\rangle_n-\frac12m^*\beta^2\langle x^3\rangle_n
+\end{equation}
+帶入式\eqref{39}，得到：
+\begin{equation}
+    \frac{d}{dt}\left(m^*\frac{d\langle x\rangle_n}{dt}\right)=-m^*\alpha\beta\langle x\rangle_n-\frac12m^*\beta^2\langle x^3\rangle_n
+\end{equation}
+同除$m^*$：
+\begin{equation}
+    \frac{d^2\langle x\rangle_n}{dt^2}=-\alpha\beta\langle x\rangle_n-\frac12\beta^2\langle x^3\rangle_n\label{47}
+\end{equation}
+洽對應式\eqref{17}
+    \item $\hat{O}=y$
+\newline\noindent
+求對易子
+\begin{equation*}
+    \left[y,\frac{p_x^2}{2m^*}+V(x,\alpha)\right]=\frac{1}{2m^*}\left[y,p_x^2\right]+\left[y,V(x,\alpha)\right]
+\end{equation*}
+由正交對易性，第一項明顯為0
+\newline\noindent
+第二項因含有$\alpha$，因此需拆解，由對易恆等式：
+\[[y,f(p_y)]=i\hbar\frac{\partial f}{\partial p_y}\]
+可得
+\begin{align}
+    \left[y,V(x,\alpha)\right]&=i\hbar\frac{\partial}{\partial p_y}\left(\frac{1}{2}m^*\alpha^2 + \frac{1}{2}m^*\alpha\beta x^2 + \frac{1}{8}m^*\beta^2 x^4\right)\nonumber\\&=i\hbar\frac{\partial}{\partial\alpha}\left(\frac{1}{2}m^*\alpha^2 + \frac{1}{2}m^*\alpha\beta x^2 + \frac{1}{8}m^*\beta^2 x^4\right)\cdot\frac{\partial\alpha}{\partial p_y}\nonumber\\&=\frac{i\hbar} {m^*}\frac{\partial}{\partial\alpha}\left(\frac{1}{2}m^*\alpha^2 + \frac{1}{2}m^*\alpha\beta x^2 + \frac{1}{8}m^*\beta^2 x^4\right)\nonumber\\&=\frac{i\hbar}{m^*}\left(m^*\alpha+\frac12m^*\beta x^2\right)\nonumber\\&=i\hbar\left(\alpha+\frac12\beta x^2\right)
+\end{align}
+因此
+\begin{equation}
+    [y,H]=i\hbar\left(\alpha+\frac12\beta x^2\right)
+\end{equation}
+帶回 Ehrenfest thrm，得：
+\begin{align}
+    &\frac{d\langle\hat{y}\rangle}{dt}=\frac{1}{i\hbar}\cdot i\hbar\left\langle\alpha+\frac12\beta x^2\right\rangle=\alpha+\frac12\beta\langle x^2\rangle\nonumber \\
+    &\to\frac{d\langle\hat{y}\rangle}{dt}=\alpha+\frac12\beta\langle x^2\rangle
+\end{align}
+量子化：
+\begin{equation}
+    \frac{d\langle\hat{y}\rangle_n}{dt}=\alpha+\frac12\beta\langle x^2\rangle_n\label{51}
+\end{equation}
+洽對應式\eqref{18}
+    \item $\hat{O}=p_y$
+\newline\noindent
+求對易子
+\begin{equation*}
+    \left[p_y,\frac{p_x^2}{2m^*}+V(x,\alpha)\right]=\frac{1}{2m^*}\left[p_y,p_x^2\right]+\left[p_y,V(x,\alpha)\right]
+\end{equation*}
+由正交對易性，第一項明顯為0
+\newline\noindent
+第二項一部分是因為正交對易性（$[p_y,f(x)]=0$），另一部分則是自對易為零（$[p_y,g(p_y)]=0$），更別說耦合項也應為0，因此第二項亦為0。
+\newline\noindent
+因此
+\begin{equation}
+    [p_y,H]=0
+\end{equation}
+亦即$y$方向動量守恆：
+\begin{equation}
+    \langle p_y\rangle\equiv\langle\alpha\rangle=\text{const}
+\end{equation}
+\end{enumerate}
+結合式\eqref{47}與式\eqref{51}，可寫下量子型態的運動方程式：{\color{red}
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        &\frac{d^2\langle x\rangle_n}{dt^2}+\alpha\beta\langle x\rangle_n+\frac12\beta^2\langle x^3\rangle_n=0 \\
+        &\frac{d\langle\hat{y}\rangle_n}{dt}=\alpha+\frac12\beta\langle x^2\rangle_n
+    \end{aligned}
+    \right.
+\end{equation}
+}
+\section{本徵態與本徵能（基底操作與帶狀矩陣）}
+回顧式\eqref{29}，對於這個複雜的二階微分方程，可以假設基底進行展開討論，如下：
+\newline\noindent
+先將此方程式展開，可得：
+\begin{equation}
+    -\frac{\hbar^2}{2m^*}\frac{d^2\psi}{dx^2}+\frac12m^*\left(\alpha^2+\alpha\beta x^2+\frac14\beta^2x^4\right)\psi=E\psi
+\end{equation}
+為矩陣化此ODE，我們必須先進行無因次化，以確定波函數展幅$\ell$，避免截斷條件與尺度因素影響模擬結果：
+\begin{equation}
+    x\to \xi=\frac{x}{\ell}\implies-\frac{\hbar^2}{2m^*\ell^2}\frac{d^2\psi}{d\xi^2}+\frac12m^*\alpha^2\psi+\frac12m^*\alpha\beta\ell^2\xi^2\psi+\frac18m^*\beta^2\ell^2\xi^4\psi=E\psi
+\end{equation}
+因此有能量係數：
+\begin{equation}
+    \begin{matrix}
+        K_x=-\frac{\hbar^2}{2m^*\ell^2} & K_y=\frac12m^*\alpha^2 \\
+        V_1=\frac12m^*\alpha\beta\ell^2 & V_2=\frac18m^*\beta^2\ell^4
+    \end{matrix}
+\end{equation}
+化簡方程式得：
+\begin{equation}
+    K_x\frac{d^2\psi}{d\xi^2}+K_y\psi+V_1\xi^2\psi+V_2\xi^4\psi=E\psi
+\end{equation}
+設定波函數由多重基底所展開： 
+\begin{equation}
+    \psi(\xi)=\sum_{n=1}^{\infty}{c_n\psi_n(\xi)}
+\end{equation}
+帶入可得
+\begin{equation}
+    \sum_{n=1}^{\infty}{K_xc_n\frac{d^2\psi_n}{d\xi^2}+K_yc_n\psi_n+V_1c_n\xi^2\psi_n+V_2c_n\xi^4\psi_n}=\sum_{n=1}^{\infty}{Ec_n\psi_n}
+\end{equation}
+整理級數內容：
+\begin{equation}
+    \sum_{n=1}^{\infty}{\left[K_x\frac{d^2\psi}{d\xi^2}+K_y\psi_n+V_1\xi^2\psi_n+V_2\xi^4\psi_n\right]c_n}=\sum_{n=1}^{\infty}{\left[E\psi_n\right]c_n}
+\end{equation}
+右乘另一共軛基底$\psi_m^*(\xi)$，並進行內積：
+\begin{equation}
+    \int_{-\infty}^{\infty}{\psi_m^*\sum_{n=1}^{\infty}{\left[K_x\frac{d^2\psi}{d\xi^2}+K_y\psi_n+V_1\xi^2\psi_n+V_2\xi^4\psi_n\right]c_n}}d\xi=\int_{-\infty}^{\infty}{\psi_m^*\sum_{n=1}^{\infty}{\left[E\psi_n\right]c_n}}d\xi
+\end{equation}
+交換積分與求和順序
+\begin{equation}
+    \sum_{n=1}^{\infty}{\left[\int_{-\infty}^{\infty}{\psi_m^*\left(K_x\frac{d^2\psi}{d\xi^2}+K_y\psi_n+V_1\xi^2\psi_n+V_2\xi^4\psi_n\right)}d\xi\right]c_n}=\sum_{n=1}^{\infty}{\left[\int_{-\infty}^{\infty}{\psi_m^*\left(E\psi_n\right)}d\xi\right]c_n}
+\end{equation}
+整理一下
+\begin{equation}
+    \sum_{n=1}^{\infty}{\left[\int_{-\infty}^{\infty}{K_x\psi_m^*\frac{d^2\psi}{d\xi^2}+K_y\psi_m^*\psi_n+V_1\psi_m^*\xi^2\psi_n+V_2\psi_m^*\xi^4\psi_n}d\xi\right]c_n}=\sum_{n=1}^{\infty}{\left[\int_{-\infty}^{\infty}{E\psi_m^*\psi_n}d\xi\right]c_n}
+\end{equation}
+假設$\psi_n$是標準正交基，則有：
+\begin{equation}
+    \int_{-\infty}^{\infty}{\psi_m^*\psi_n}d\xi=\delta_{mn}
+\end{equation}
+因此
+\begin{equation}
+    \sum_{n=1}^{\infty}{\left[K_x\int_{-\infty}^{\infty}{\psi_m^*\psi''}d\xi+K_y\delta_{mn}+V_1\int_{-\infty}^{\infty}{\psi_m^*\xi^2\psi_n}d\xi+V_2\int_{-\infty}^{\infty}{\psi_m^*\xi^4\psi_n}d\xi\right]c_n}=\sum_{n=1}^{\infty}{\left[E\delta_{mn}\right]c_n}
+\end{equation}
+引入狄拉克記號：
+\begin{equation}
+    \sum_{n=1}^{\infty}{\left[K_x\langle m|D^2|n\rangle+K_y\delta_{mn}+K_y\delta_{mn}+V_1\langle m|\xi^2|n\rangle+V_2\langle m|\xi^4|n\rangle\right]c_n}=\sum_{n=1}^{\infty}{\left[E\delta_{mn}\right]c_n}
+\end{equation}
+可以寫成矩陣式：
+\begin{equation}
+    H\vec{c}=E\mathbb{I}\vec{c}
+\end{equation}
+其中
+\begin{equation}
+    H_{mn}=K_x\langle m|D^2|n\rangle+K_y\delta_{mn}+K_y\delta_{mn}+V_1\langle m|\xi^2|n\rangle+V_2\langle m|\xi^4|n\rangle
+\end{equation}
+為方便求此矩陣之各項，假設$\psi_n$為厄米基底，引入升降算符，有：
+\begin{equation}
+    \begin{aligned}
+        \hat{a}=\frac{1}{\sqrt{2}}(\xi+D) \\
+        \hat{a}^\dagger=\frac{1}{\sqrt{2}}(\xi-D)
+    \end{aligned}
+    \to
+    \begin{aligned}
+         \xi=\frac{1}{\sqrt{2}}(\hat{a}+\hat{a}^\dagger)  \\
+          D=\frac{1}{\sqrt{2}}(\hat{a}-\hat{a}^\dagger)
+    \end{aligned}
+\end{equation}
+另有能階數算符：
+\begin{equation}
+    \hat{N}=\hat{a}^\dagger\hat{a}=\hat{a}\hat{a}^\dagger-1
+\end{equation}
+作用於態向量，有恆等式： 
+\begin{equation}
+    \left.\hat{a}|n\right\rangle=\sqrt{n}|n-1\rangle\to\left.\hat{a}^2|n\right\rangle=\sqrt{n(n-1)}|n-2\rangle
+\end{equation}
+以及
+\begin{equation}
+    \left.\hat{a}^\dagger|n\right\rangle=\sqrt{n+1}|n+1\rangle\to\left.\hat{a}^{\dagger2}|n\right\rangle=\sqrt{(n+1)(n+2)}|n+2\rangle
+\end{equation}
+與能階數算符：
+\begin{equation}
+    \hat{N}|n\rangle=n|n\rangle
+\end{equation}
+套入二階微分算符：
+\begin{equation}
+    D^2|n\rangle=\frac12\sqrt{n(n-1)}|n-2\rangle-\left(n-\frac12\right)|n\rangle+\frac12\sqrt{(n+1)(n+2)}|n+2\rangle
+\end{equation}
+套入平方位置算符：
+\begin{equation}
+    \xi^2|n\rangle=\frac12\sqrt{n(n-1)}|n-2\rangle+\left(n-\frac12\right)|n\rangle+\frac12\sqrt{(n+1)(n+2)}|n+2\rangle
+\end{equation}
+套入四次方位置算符：
+\begin{align}
+    \xi^4|n\rangle=&\frac14\sqrt{n(n-1)(n-2)(n-3)}|n-4\rangle+\left(n-\frac12\right)\sqrt{n(n-1)}|n-2\rangle\nonumber\\
+    +&\left(\frac32n^2+2n+\frac34\right)|n\rangle+\left(n+\frac32\right)\sqrt{(n+1)(n+2)}|n+2\rangle\nonumber\\
+    +&\frac14\sqrt{(n+1)(n+2)(n+3)(n+4)}|n+4\rangle
+\end{align}
+左乘回$m$，套入標準正交基假設，可得：
+\begin{align}
+    \langle m|D^2|n\rangle&=\frac12\sqrt{n(n-1)}\delta_{m(n-2)}-\left(n-\frac12\right)\delta_{mn}+\frac12\sqrt{(n+1)(n+2)}\delta_{m(n+2)}\\
+    \langle m|\xi^2|n\rangle&=\frac12\sqrt{n(n-1)}\delta_{m(n-2)}+\left(n-\frac12\right)\delta_{mn}+\frac12\sqrt{(n+1)(n+2)}\delta_{m(n+2)} \\
+    \langle m|\xi^4|n\rangle&=\frac14\sqrt{n(n-1)(n-2)(n-3)}\delta_{m(n-4)}+\left(n-\frac12\right)\sqrt{n(n-1)}\delta_{m(n-2)}\nonumber\\
+    &+\left(\frac32n^2+2n+\frac34\right)\delta_{mn}+\left(n+\frac32\right)\sqrt{(n+1)(n+2)}\delta_{m(n+2)}\nonumber\\
+    &+\frac14\sqrt{(n+1)(n+2)(n+3)(n+4)}\delta_{m(n+4)}
+\end{align}
+因此矩陣$H_{mn}$為
+\begin{align}
+H_{mn} &= \frac{1}{2}\sqrt{n(n-1)}K_x\delta_{m(n-2)} - \left(n+\frac{1}{2}\right)K_x\delta_{mn} + \frac{1}{2}\sqrt{(n+1)(n+2)}K_x\delta_{m(n+2)} + K_y\delta_{mn} \nonumber \\
+&+ \frac{1}{2}\sqrt{n(n-1)}V_1\delta_{m(n-2)} + \left(n+\frac{1}{2}\right)V_1\delta_{mn} + \frac{1}{2}\sqrt{(n+1)(n+2)}V_1\delta_{m(n+2)} \nonumber \\
+&+ \frac{1}{4}\sqrt{n(n-1)(n-2)(n-3)}V_2\delta_{m(n-4)} + \left(n-\frac{1}{2}\right)\sqrt{n(n-1)}V_2\delta_{m(n-2)} \nonumber \\
+&+ \left(\frac{3}{2}n^2+2n+\frac{3}{4}\right)V_2\delta_{mn} + \left(n+\frac{3}{2}\right)\sqrt{(n+1)(n+2)}V_2\delta_{m(n+2)} \nonumber \\
+&+ \frac{1}{4}\sqrt{(n+1)(n+2)(n+3)(n+4)}V_2\delta_{m(n+4)}
+\end{align}
+整理一下：
+\begin{align}
+    H_{mn}&= \frac{1}{4}\sqrt{n(n-1)(n-2)(n-3)}V_2\delta_{m(n-4)} \nonumber \\
+&+ \sqrt{n(n-1)}\left(\frac{1}{2}K_x + \frac{1}{2}V_1 + \left(n-\frac{1}{2}\right)V_2\right)\delta_{m(n-2)} \nonumber \\
+&- \left[\left(n+\frac{1}{2}\right)(K_x-V_1) - K_y - \left(\frac{3}{2}n^2+2n+\frac{3}{4}\right)V_2\right]\delta_{mn} \nonumber \\
+&+ \sqrt{(n+1)(n+2)}\left(\frac{1}{2}K_x + \frac{1}{2}V_1 + \left(n+\frac{3}{2}\right)V_2\right)\delta_{m(n+2)} \nonumber \\
+&+ \frac{1}{4}\sqrt{(n+1)(n+2)(n+3)(n+4)}V_2\delta_{m(n+4)}
+\end{align}
+寫成矩陣形式： 
+\begin{equation}
+    H=
+    \begin{bmatrix}
+        H_{11} & 0 & H_{13} & 0 & H_{15} & 0 & 0 & \cdots \\
+0 & H_{22} & 0 & H_{24} & 0 & H_{26} & 0 & \cdots \\
+H_{31} & 0 & H_{33} & 0 & H_{35} & 0 & H_{37} & \cdots \\
+0 & H_{24} & 0 & H_{44} & 0 & H_{46} & 0 & \cdots \\
+H_{51} & 0 & H_{53} & 0 & H_{55} & 0 & H_{57} & \cdots \\
+0 & H_{26} & 0 & H_{64} & 0 & H_{66} & 0 & \cdots \\
+0 & 0 & H_{73} & 0 & H_{75} & 0 & H_{77} & \cdots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{bmatrix}
+\end{equation}
+其中
+\begin{align}
+    &H_{n-4,n} = \frac{1}{32}\sqrt{n(n-1)(n-2)(n-3)}\, m^* \beta^2 \ell^4 \\
+    &H_{n-2,n} = \sqrt{n(n-1)} \left( -\frac{\hbar^2}{4m^* \ell^2} + \frac{1}{4} m^* \alpha \beta \ell^2 + \frac{1}{8}\left(n - \frac{1}{2}\right) m^* \beta^2 \ell^4 \right) \\
+    &H_{n,n} = \frac{\hbar^2}{2m^* \ell^2}\left(n + \frac{1}{2}\right) + \frac{1}{2}\left(n + \frac{1}{2}\right) m^* \alpha \beta \ell^2 + \frac{1}{2} m^* \alpha^2 + \frac{1}{8}\left(\frac{3}{2}n^2 + 2n + \frac{3}{4}\right) m^* \beta^2 \ell^4 \\
+    &H_{n,n+2} = \sqrt{(n+1)(n+2)} \left( -\frac{\hbar^2}{4m^* \ell^2} + \frac{1}{4} m^* \alpha \beta \ell^2 + \frac{1}{8}\left(n + \frac{3}{2}\right) m^* \beta^2 \ell^4 \right) \\
+    &H_{n,n+4} = \frac{1}{32}\sqrt{(n+1)(n+2)(n+3)(n+4)}\, m^* \beta^2 \ell^4
+\end{align}
+因此原二階微分方程轉為矩陣形式：
+{\footnotesize
+\begin{equation}
+    \begin{bmatrix}
+        H_{11} & 0 & H_{13} & 0 & H_{15} & 0 & 0 & \cdots \\
+        0 & H_{22} & 0 & H_{24} & 0 & H_{26} & 0 & \cdots \\
+        H_{31} & 0 & H_{33} & 0 & H_{35} & 0 & H_{37} & \cdots \\
+        0 & H_{24} & 0 & H_{44} & 0 & H_{46} & 0 & \cdots \\
+        H_{51} & 0 & H_{53} & 0 & H_{55} & 0 & H_{57} & \cdots \\
+        0 & H_{26} & 0 & H_{64} & 0 & H_{66} & 0 & \cdots \\
+        0 & 0 & H_{73} & 0 & H_{75} & 0 & H_{77} & \cdots \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{bmatrix}
+    \begin{pmatrix}
+        c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \\ c_7 \\ \vdots
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        E_1 & 0 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+        0 & E_2 & 0 & 0 & 0 & 0 & 0 & \cdots \\
+        0 & 0 & E_3 & 0 & 0 & 0 & 0 & \cdots \\
+        0 & 0 & 0 & E_4 & 0 & 0 & 0 & \cdots \\
+        0 & 0 & 0 & 0 & E_5 & 0 & 0 & \cdots \\
+        0 & 0 & 0 & 0 & 0 & E_6 & 0 & \cdots \\
+        0 & 0 & 0 & 0 & 0 & 0 & E_7 & \cdots \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+    \end{bmatrix}
+    \begin{pmatrix}
+        c_1 \\ c_2 \\ c_3 \\ c_4 \\ c_5 \\ c_6 \\ c_7 \\ \vdots
+    \end{pmatrix}
+\end{equation}
+}
+亦即將$H$對角化，便可得到本徵能階。
+\section{以經典力學角度行軌跡分析（The analysis of trajectory）}
+首先對於純磁場系統，可以透過對\eqref{9}及或\eqref{20}帶入初始條件進行轉換，得到一特殊運動性質\[v_x^2+v_y^2=v_0^2\]
+將\eqref{9}及或\eqref{20}做數值模擬分析，可以發現其軌跡型態會發生$y$方向的漂移，因此我們可以設一個$x$方向的週期內，$y$方向的漂移量為：
+\begin{equation}
+    \Delta y\coloneqq\oint{dy}=\oint{\frac{v_y(x)}{|v_x(x)|}}dx=\oint{\frac{v_y(x)}{\sqrt{v_0^2-v_y^2(x)}}}dx
+\end{equation}
+為了得到一個週期內$x$的範圍，即環積分的上下界，我們回顧式\eqref{13}，由於要分析的對象是$x$方向，因此若將其繪製成$E-x$圖，則有有效位能為：
+\begin{equation}
+    V(x,\alpha)=\frac12 m^*\left(\alpha+\frac12\beta x^2\right)^2
+\end{equation}
+而由動力學基本概念可知，當質點的初始動能完全轉換為位能時，質點速度為零，發生轉向，換句話說，在$x$方向上的轉向點，也就是一個週期的邊界，發生在初始動能等於位能處，因此：
+\begin{equation}
+    E=V(x_{max},\alpha)\to\frac12 m^*v_0^2=\frac12m^*\left(\alpha+\frac12\beta x_{max}^2\right)^2
+\end{equation}
+其中設$v_0\geq 0$，得：
+\begin{equation}
+    v_0=\left|\alpha+\frac12\beta x_{max}^2\right|
+\end{equation}
+已知$\beta>0$，在$y$方向上最大速度（時時速度，非飄移速度）為＋時，必位於轉向點上，這是因為所有的能量在$x$方向轉為位能，而在$y$方向則吸收了剩餘的所有能量，故有：
+\begin{equation}
+    \dot{y}_{max}=\alpha+\frac12\beta x_{max}^2>0\to\alpha+\frac12\beta x_{max}^2>0
+\end{equation}
+使得
+\begin{equation}
+    v_0=\alpha+\frac12\beta x_{max}^2\to x_{max}^2=\frac{2(v_0-\alpha)}{\beta}
+\end{equation}
+根出轉向點$x$的位置：
+\begin{equation}
+    x_{max}=\pm\sqrt{\frac{2(v_0-\alpha)}{\beta}}=\pm\sqrt{\frac{2v_0}{\beta}\left(1-\frac{\alpha}{v_0}\right)}=\pm x_m
+\end{equation}
+為了方便討論，設定無因次量判別值$D$，結合式\eqref{25}：
+\begin{equation}
+    D\coloneqq\frac{\alpha}{v_0}=\sin{(\theta)}-\frac{\beta x_0^2}{2v_0}
+\end{equation}
+可發現此判別值完全由初始條件決定，預期計算出不同的$D$可以得到不同的軌跡，因此轉向點位置為：
+\begin{equation}
+    x_m=\sqrt{\frac{2v_0}{\beta}(1-D)}
+\end{equation}
+有了積分上下界，便可得到$y$方向漂移量：
+\begin{equation}
+    \Delta y=2\int_{-x_m}^{x_m}{\frac{\alpha+\frac12\beta x^2}{\sqrt{v_0^2-\left(\alpha+\frac12\beta x^2\right)^2}}}dx
+\end{equation}
+式中倍數$2$是因為一個漂移量要經過\textbf{兩}次從負轉向點往正轉向點的過程，即：
+\[-x_m\to x_m\to -x_m\to x_m\]
+為解出此積分，透過變數變換：
+\begin{equation}
+    \left.x\right|^{x_m}_{-x_m}=\left.\sqrt{\frac{2v_0}{\beta}}u\right|^{\sqrt{1-D}}_{-\sqrt{1-D}}\to dx=\sqrt{\frac{2v_0}{\beta}}du
+\end{equation}
+又
+\begin{equation*}
+    \alpha+\frac12\beta x^2=Dv_0+\frac{\beta}{2}\left(\sqrt{\frac{2v_0}{\beta}}u\right)^2=v_0D+v_0u^2=v_0(D+u^2)
+\end{equation*}
+則原積分
+\begin{align*}
+    \Delta y&=2\int_{-\sqrt{1-D}}^{\sqrt{1-D}}{\frac{v_0(D+u^2)}{\sqrt{v_0^2-[v_0(D+u^2)]^2}}}\sqrt{\frac{2v_0}{\beta}}du\\
+    &=2\sqrt{\frac{2v_0}{\beta}}\int_{-\sqrt{1-D}}^{\sqrt{1-D}}{\frac{D+u^2}{\sqrt{1-(D+u^2)^2}}}du
+\end{align*}
+    此時被積函數為偶函數，因此可更進一步化簡：
+    \begin{equation*}
+        \Delta y=4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\sqrt{1-D}}{\frac{D+u^2}{\sqrt{1-(D+u^2)^2}}}du
+    \end{equation*}
+因式分解分母
+\begin{align*}
+    &1-(D+u^2)^2=(1-D-u^2)(1+D+u^2)\\
+    \to&\Delta y=4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\sqrt{1-D}}{\frac{D+u^2}{\sqrt{(1-D-u^2)(1+D+u^2)}}}du
+\end{align*}
+進行第二次變數代換：
+\begin{equation}
+    \left.u\right|^{\sqrt{1-D}}_{0}=\left.\sqrt{1-D}\sin{(\phi)}\right|^{\frac{\pi}{2}}_{0}\to du=\sqrt{1-D}\cos{(\phi)}d\phi
+\end{equation}
+又
+\begin{align*}
+    &(1-D-u^2)(1+D+u^2)\nonumber\\
+    =&[1-D-(1-D)\sin^2{(\phi)}][1+D+(1-D)\sin^2{(\phi)}]\nonumber\\
+    =&[(1-D)\cos^2{(\phi)}][1+D+(1-D)\sin^2{(\phi)}]
+\end{align*}
+以及
+\begin{equation*}
+    D+u^2=D+(1-D)\sin^2{(\phi)}
+\end{equation*}
+帶回原積分
+\begin{align*}
+    \Delta y=&4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\sqrt{[(1-D)\cos^2{(\phi)}][1+D+(1-D)\sin^2{(\phi)}]}}}\sqrt{1-D}\cos{(\phi)}d\phi\\
+    =&4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\left(\sqrt{1-D}\cos{(\phi)}\right)\sqrt{1+D+(1-D)\sin^2{(\phi)}}}}\sqrt{1-D}\cos{(\phi)}d\phi\\
+    =&4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\sqrt{1+D+(1-D)\sin^2{(\phi)}}}}d\phi
+\end{align*}
+令\[m=-\frac{1-D}{1+D}\to 1-D=-(1+D)m\]帶入積分化簡：
+\begin{align*}
+    \Delta y&=4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\sqrt{1+D-(1+D)m\sin^2{(\phi)}}}}d\phi\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\sqrt{(1+D)(1-m\sin^2{(\phi)})}}}d\phi\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\int_{0}^{\frac{\pi}{2}}{\frac{D+(1-D)\sin^2{(\phi)}}{\sqrt{1-m\sin^2{(\phi)}}}}d\phi
+\end{align*}
+接著我們引入完全橢圓積分：
+\begin{enumerate}
+    \item 第一類完全橢圓積分：
+\begin{equation}
+    K(m)=\int_{0}^{\frac{\pi}{2}}{\frac{1}{\sqrt{1-m\sin^2{(\theta)}}}}d\theta
+\end{equation}
+    \item 第二類完全橢圓積分：
+\begin{equation}
+    E(m)=\int_{0}^{\frac{\pi}{2}}{\sqrt{1-m\sin^2{(\theta)}}}d\theta
+\end{equation}
+    \item 第三類完全橢圓積分：
+\end{enumerate}
+\begin{equation}
+    \Pi(n,m)=\int_{0}^{\frac{\pi}{2}}{\frac{1}{(1-n\sin^2{\theta})\sqrt{1-m\sin^2(\theta)}}}d\theta
+\end{equation}
+注意到
+\begin{gather*}
+    \begin{aligned}
+        K(m)-E(m) &= \int_{0}^{\frac{\pi}{2}} \left( \frac{1}{\sqrt{1-m\sin^2{(\theta)}}} - \sqrt{1-m\sin^2{(\theta)}} \right) d\theta \\
+                  &= \int_{0}^{\frac{\pi}{2}} \frac{1-(1-m\sin^2{(\theta)})}{\sqrt{1-m\sin^2{(\theta)}}} \, d\theta = \int_{0}^{\frac{\pi}{2}} \frac{m\sin^2{(\theta)}}{\sqrt{1-m\sin^2{(\theta)}}} \, d\theta
+    \end{aligned} \\
+    \implies \frac{K(m)-E(m)}{m} = \int_{0}^{\frac{\pi}{2}} \frac{\sin^2{(\theta)}}{\sqrt{1-m\sin^2{(\theta)}}} \, d\theta
+\end{gather*}
+則原積分拆解
+\begin{align*}
+    \Delta y&=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\left(D\int_{0}^{\frac{\pi}{2}}{\frac{1}{\sqrt{1-m\sin^2{(\phi)}}}}d\phi+(1-D)\int_{0}^{\frac{\pi}{2}}{\frac{\sin^2{(\phi)}}{\sqrt{1-m\sin^2{(\phi)}}}}d\phi\right)\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\left(DK(m)+(1-D)\cdot\frac{K(m)-E(m)}{m}\right)\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\left(DK+(1-D)\cdot\frac{K-E}{-\frac{1-D}{1+D}}\right)\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}[DK-(1+D)(K-E)]\\
+    &=4\sqrt{\frac{2v_0}{\beta}}\frac{DK+E-K+DE-DK}{\sqrt{1+D}}
+\end{align*}
+將函數變數帶回，得：
+\begin{equation}
+    \Delta y=4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\left((1+D)\cdot E\left(-\frac{1-D}{1+D}\right)-K\left(-\frac{1-D}{1+D}\right)\right)
+\end{equation}
+可發現$y$方向漂移量僅與判別值$D$、初始速度$v_0$有關，而判別值又與初始發射角度$\theta$、初始位置$x_0$有關。
+\section{以經典方法解無限型軌跡（The infinite loop）}
+若欲觸發$\infty$型封閉軌跡，則要求：
+\begin{equation}
+    \Delta y=0
+\end{equation}
+因此
+\begin{equation}
+    4\sqrt{\frac{2v_0}{\beta}}\frac{1}{\sqrt{1+D}}\left((1+D)\cdot E\left(-\frac{1-D}{1+D}\right)-K\left(-\frac{1-D}{1+D}\right)\right)=0
+\end{equation}
+係數部分在$D\neq-1$的情況下，可同除，因此可更進一步化簡此方程為：
+\begin{equation}
+    (1+D)\cdot E\left(-\frac{1-D}{1+D}\right)-K\left(-\frac{1-D}{1+D}\right)=0
+\end{equation}
+在化簡，有：
+\begin{equation}
+    D=\frac{K\left(-\frac{1-D}{1+D}\right)}{E\left(-\frac{1-D}{1+D}\right)}-1
+\end{equation}
+形成超越方程，解出$D$可得$\infty$型封閉軌跡超越方程條件。
+\newline\noindent
+利用Wolfram alpha，可以求得：
+\begin{equation}
+    D\approx-0.65223
+\end{equation}
+即當初始條件間的關係滿足
+\begin{equation}
+    \sin{(\theta)}-\frac{\beta x_0^2}{2v_0}\approx-0.65223
+\end{equation}
+時，發生$\infty$型封閉軌跡，若改以能量形式表述，則有
+\begin{align*}
+    Dv_0&=v_0\sin{(\theta)}-\frac12\beta x_0^2\\
+    \frac12\beta x_0^2&=v_0(\sin{(\theta)}-D)\\
+    \frac14\beta^2x_0^4&=v_0^2(\sin{(\theta)}-D)^2\\
+    \frac14\beta^2x_0^4&=\frac{2E}{m^*}(\sin{(\theta)}-D)^2\\
+    \frac18m^*\beta^2x_0^4&=E(\sin{(\theta)}-D)^2\\
+    E&=\frac{m^*\beta^2}{8}\frac{x_0^4}{(\sin{(\theta)}-D)^2}
+\end{align*}
+將$\beta=\frac{eB_0}{m^*L}$與$D=-0.65223$帶回
+\begin{equation}
+    E=\frac{e^2B_0^2}{8m^*L^2}\frac{x_0^4}{(\sin{(\theta)}+0.65223)^2}
+\end{equation}
+\end{document}

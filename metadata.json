@@ -1,0 +1,8 @@
+{
+  "name": "磁場梯度電子動力學模擬",
+  "description": "線性非均勻磁場 B(x) = (B₀x/L)k̂ 中二維電子系統之經典動力學與量子能帶波函數互動模擬平台",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
